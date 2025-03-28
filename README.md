@@ -20,12 +20,9 @@ This is a **simple and efficient URL shortening application** built with Flask, 
 ---
 
 ## 🚀 **Getting Started**  
-### 🔹 **1. Clone the Repository**  
+### 🔹 **1. Running the Application**  
 ```bash
-git clone https://github.com/your-username/url-shortener.git
-cd url-shortener
+python main.py
+Open your web browser and navigate to http://localhost:5000 to use the application.  
 
-### 🔹 **2. Install Dependencies**  
-```bash
-pip install flask
 
