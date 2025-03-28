@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>URL Shortener-Nidhi Tulsyan</title>
+        <style>
+            /* General body styling */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            /* Container for form */
+            .container {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+                text-align: center;
+            }
+
+            /* Heading styling */
+            h1 {
+                color: #4CAF50;
+                margin-bottom: 20px;
+                font-size: 24px;
+                font-weight: 600;
+            }
+
+            /* Input field styling */
+            input[type="url"] {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 16px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 16px;
+                box-sizing: border-box;
+                transition: border-color 0.3s ease;
+                outline: none;
+            }
+
+            input[type="url"]:focus {
+                border-color: #4CAF50;
+                box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+            }
+
+            /* Button styling */
+            button {
+                background-color: #4CAF50;
+                color: white;
+                padding: 12px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 16px;
+                width: 100%;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+            /* Result display styling */
+            .result-container {
+                margin-top: 20px;
+                padding: 15px;
+                background-color: #f0fff0;
+                border: 1px solid #4CAF50;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                box-shadow: 0 4px 8px rgba(0, 128, 0, 0.1);
+            }
+
+            .result-link {
+                color: #4CAF50;
+                font-size: 16px;
+                font-weight: 500;
+                text-decoration: none;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .result-link:hover {
+                text-decoration: underline;
+            }
+
+            /* Copy button styling */
+            .copy-btn {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                padding: 8px 12px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background-color 0.3s ease;
+            }
+
+            .copy-btn:hover {
+                background-color: #45a049;
+            }
+
+            /* Responsive design */
+            @media (max-width: 480px) {
+                h1 {
+                    font-size: 20px;
+                }
+
+                input[type="url"], button, .copy-btn {
+                    font-size: 14px;
+                }
+
+                .result-link {
+                    font-size: 14px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>URL Shortener</h1>
+            <form method="POST" action="{{ url_for('index') }}">
+                <input type="url" name="long_url" placeholder="Enter the long URL" required>
+                <button type="submit">Shorten</button>
+            </form>
+
+            {% if short_url %}
+            <div class="result-container">
+                <a href="{{ short_url }}" target="_blank" class="result-link">{{ short_url }}</a>
+                <button class="copy-btn" onclick="copyToClipboard('{{ short_url }}')">Copy</button>
+            </div>
+            {% endif %}
+        </div>
+
+        <script>
+            // Function to copy URL to clipboard
+            function copyToClipboard(url) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Shortened URL copied to clipboard!');
+                }).catch(err => {
+                    alert('Failed to copy URL.');
+                    console.error('Error:', err);
+                });
+            }
+        </script>
+    </body>
+</html>
